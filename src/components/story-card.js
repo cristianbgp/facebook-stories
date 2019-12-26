@@ -1,5 +1,6 @@
 import React from "react";
 import "./../extra-margin.css";
+import PlusIconSVG from "./icons/plus";
 
 const ImageStyles = {
   backgroundImage: "url(https://picsum.photos/160/300)",
@@ -26,7 +27,25 @@ const extraLinearGradientStyles = {
   background: "linear-gradient(rgba(255,255,255,0) 0%, rgba(0,0,0,0.7) 100%)"
 };
 
-function StoryCard({ data }) {
+const plusIconStyles = {
+  ...AvatarContainerStyles,
+  boxShadow: "0 0 0px 3px white"
+};
+
+function PlusIcon() {
+  return (
+    <div
+      className="h-10 w-10 rounded-full bg-white flex justify-center items-center"
+      style={plusIconStyles}
+    >
+      <div className="h-5 w-5 rounded-full bg-contain">
+        <PlusIconSVG fill="#1474ff" />
+      </div>
+    </div>
+  );
+}
+
+function StoryCard({ data, currentUser }) {
   return (
     <div
       className="child relative rounded-lg bg-cover h-64 w-40 flex-none m-1"
@@ -36,16 +55,26 @@ function StoryCard({ data }) {
         className="h-full w-full rounded-lg flex flex-col justify-between p-4"
         style={extraLinearGradientStyles}
       >
-        <div
-          className="h-10 w-10 rounded-full"
-          style={data.seen ? AvatarContainerStylesSeen : AvatarContainerStyles}
-        >
+        {currentUser ? (
+          <PlusIcon />
+        ) : (
           <div
-            className="h-10 w-10 rounded-full bg-contain"
-            style={AvatarStyles}
-          />
-        </div>
-        <p className="text-white text-base">John Doe</p>
+            className="h-10 w-10 rounded-full"
+            style={
+              !currentUser && data.seen
+                ? AvatarContainerStylesSeen
+                : AvatarContainerStyles
+            }
+          >
+            <div
+              className="h-10 w-10 rounded-full bg-contain"
+              style={AvatarStyles}
+            />
+          </div>
+        )}
+        <p className="text-white text-base">
+          {currentUser ? "Add to Story" : "John Doe"}
+        </p>
       </div>
     </div>
   );
