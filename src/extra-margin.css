@@ -1,0 +1,8 @@
+.child:last-child:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -2rem;
+  width: 2rem;
+  height: 1px;
+}
