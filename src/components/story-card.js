@@ -31,7 +31,7 @@ const plusIconStyles = {
   ...AvatarContainerStyles,
   boxShadow: "0 0 0px 3px white",
   transition: "all 0.25s ease-in-out",
-  top: "412px",
+  top: "50%",
   left: "0"
 };
 
