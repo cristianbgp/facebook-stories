@@ -29,13 +29,21 @@ const extraLinearGradientStyles = {
 
 const plusIconStyles = {
   ...AvatarContainerStyles,
-  boxShadow: "0 0 0px 3px white"
+  boxShadow: "0 0 0px 3px white",
+  transition: "all 0.25s ease-in-out",
+  top: "412px",
+  left: "0"
 };
 
-function PlusIcon() {
+function PlusIcon({ scrollStyle }) {
+  const noScrollStyles =
+    "h-10 w-10 rounded-full bg-white flex justify-center items-center";
+  const scrollStyles =
+    "rounded-l-none z-10 fixed h-10 w-10 rounded-full bg-white flex justify-center items-center";
+
   return (
     <div
-      className="h-10 w-10 rounded-full bg-white flex justify-center items-center"
+      className={scrollStyle ? scrollStyles : noScrollStyles}
       style={plusIconStyles}
     >
       <div className="h-5 w-5 rounded-full bg-contain">
@@ -45,18 +53,20 @@ function PlusIcon() {
   );
 }
 
-function StoryCard({ data, currentUser }) {
+function StoryCard({ data, currentUser, scrollStyle }) {
   return (
     <div
       className="child relative rounded-lg bg-cover h-64 w-40 flex-none m-1"
       style={ImageStyles}
     >
       <div
-        className="h-full w-full rounded-lg flex flex-col justify-between p-4"
+        className={`h-full w-full rounded-lg flex flex-col p-4 relative ${
+          scrollStyle ? "justify-end" : "justify-between"
+        }`}
         style={extraLinearGradientStyles}
       >
         {currentUser ? (
-          <PlusIcon />
+          <PlusIcon scrollStyle={scrollStyle} />
         ) : (
           <div
             className="h-10 w-10 rounded-full"
